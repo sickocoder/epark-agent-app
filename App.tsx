@@ -1,20 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ThemeProvider } from 'styled-components';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import { useLoadFonts } from './src/hooks';
+import { GetStarted } from './src/screens/onboarding';
+import { defaulTheme } from './src/theme';
 
 export default function App() {
+  const { isFontLoaded } = useLoadFonts();
+
+  if (!isFontLoaded) return null;
+
   return (
-    <View style={styles.container}>
-      <Text>E-Park App</Text>
+    <ThemeProvider theme={defaulTheme}>
       <StatusBar style="auto" />
-    </View>
+      <GetStarted />
+    </ThemeProvider>
   );
 }
