@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components';
 
 import { useLoadFonts } from './src/hooks';
-import { GetStarted } from './src/screens/onboarding';
+import OnboardingRoutingSystem from './src/screens/onboarding';
 import { defaulTheme } from './src/theme';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
   return (
     <ThemeProvider theme={defaulTheme}>
       <StatusBar style="auto" />
-      <GetStarted />
+      <OnboardingRoutingSystem />
     </ThemeProvider>
   );
 }
