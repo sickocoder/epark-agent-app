@@ -1,10 +1,12 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
 } from 'react-native';
+
+import { makeFirebaseAuthService } from '../../../factories';
 
 import { ScreenContainer, Box, Text, Image, Spacer } from '../../../components';
 import { AssetsEnum } from '../../../constants';
@@ -13,8 +15,23 @@ import { AnyObject } from '../../../types';
 import LoginForm from './login-form';
 
 const LoginScreen: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const onFormSubmit = (values: AnyObject) => {
-    console.log(values);
+    const authService = makeFirebaseAuthService();
+    (async () => {
+      setIsLoading(true);
+      try {
+        await authService.authenticate({
+          username: values.username,
+          password: values.password,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   };
 
   return (
@@ -44,7 +61,7 @@ const LoginScreen: FC = () => {
                 </Text>
               </Box>
 
-              <LoginForm onSubmit={onFormSubmit} />
+              <LoginForm isLoading={isLoading} onSubmit={onFormSubmit} />
             </Box>
 
             <Spacer />

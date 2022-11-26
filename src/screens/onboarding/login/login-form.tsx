@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
-import { Box, Text, TextInput, Button } from '../../../components';
+import { Box, TextInput, Button } from '../../../components';
 import { AnyObject } from '../../../types';
 
-const LoginForm: FC<{ onSubmit: (values: AnyObject) => void }> = ({
-  onSubmit,
-}) => {
+const LoginForm: FC<{
+  isLoading: boolean;
+  onSubmit: (values: AnyObject) => void;
+}> = ({ onSubmit, isLoading }) => {
   const {
     control,
     handleSubmit,
@@ -31,6 +32,7 @@ const LoginForm: FC<{ onSubmit: (values: AnyObject) => void }> = ({
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            keyboardType="email-address"
             error={errors.username}
           />
         )}
@@ -60,7 +62,7 @@ const LoginForm: FC<{ onSubmit: (values: AnyObject) => void }> = ({
       <Button
         variant="primary"
         onPress={handleSubmit(onSubmit)}
-        disabled={!!errors.username || !!errors.password}
+        disabled={!!errors.username || !!errors.password || isLoading}
       >
         Entrar
       </Button>
