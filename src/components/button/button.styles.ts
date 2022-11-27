@@ -19,4 +19,6 @@ export const ButtonWrapper = styled.TouchableOpacity<ButtonWrapperProps>`
         `;
     }
   }}
+
+  opacity: ${(props) => (props.disabled ? 0.4 : 1)};
 `;

@@ -7,6 +7,7 @@ export interface ButtonWrapperProps {
 }
 
 export interface ButtonProps extends ButtonWrapperProps {
-  onClick?: () => void;
+  onPress?: () => void;
+  disabled?: boolean;
   children: string | ReactElement;
 }
