@@ -1,10 +1,9 @@
 import { FC } from 'react';
 
-import { useAuthentication } from '../hooks';
-
-import OnboardingRouting from './onboarding';
-import MainRouting from './main';
 import { UserProvider } from '../context';
+import { useAuthentication } from '../hooks';
+import MainRouting from './main';
+import OnboardingRouting from './onboarding';
 
 const AppRouting: FC = () => {
   const { isAuthenticated, isLoading, user } = useAuthentication();

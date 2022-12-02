@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Image as NativeImage } from 'react-native';
+
 import { ImageProps } from './image.types';
 
 const Image: FC<ImageProps> = ({ asset, height, width }) => {

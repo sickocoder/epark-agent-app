@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { Box, Typography } from '../../../../components';
 import { AssetsEnum } from '../../../../constants';
-
 import HomeMainContentCard from './home-main-content-card';
 
 const HomeMainContent: FC = () => (

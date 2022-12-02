@@ -1,4 +1,5 @@
 import { DefaultTheme } from 'styled-components/native';
+
 import { FontsEnum } from '../constants';
 
 // eslint-disable-next-line import/prefer-default-export

@@ -1,12 +1,11 @@
-import { FC } from 'react';
 import ExpoConstants from 'expo-constants';
+import { FC } from 'react';
 import { ScrollView } from 'react-native';
 
 import { Box } from '../../../components';
-
 import HomeHeader from './home-header';
-import HomeWarningAlert from './home-warning';
 import HomeMainContent from './home-main-content';
+import HomeWarningAlert from './home-warning';
 
 const Home: FC = () => (
   <ScrollView

@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+
 import { TUser } from '../types';
 
 const useAuthentication = () => {

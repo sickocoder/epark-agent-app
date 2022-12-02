@@ -1,17 +1,15 @@
 import { FC, useState } from 'react';
 import {
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Platform,
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
-import { makeFirebaseAuthService } from '../../../factories';
-
-import { ScreenContainer, Box, Text, Image, Spacer } from '../../../components';
+import { Box, Image, ScreenContainer, Spacer, Text } from '../../../components';
 import { AssetsEnum } from '../../../constants';
+import { makeFirebaseAuthService } from '../../../factories';
 import { AnyObject } from '../../../types';
-
 import LoginForm from './login-form';
 
 const LoginScreen: FC = () => {

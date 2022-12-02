@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { BoxProps } from './box.types';
 
 import { BoxView } from './box.styles';
+import { BoxProps } from './box.types';
 
 const Box: FC<BoxProps> = ({ children, ...props }) => (
   <BoxView {...props}>{children}</BoxView>

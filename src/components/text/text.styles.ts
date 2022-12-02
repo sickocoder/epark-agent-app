@@ -1,11 +1,11 @@
-import styled from 'styled-components/native';
 import {
   css,
-  InterpolationFunction,
-  ThemeProps,
   DefaultTheme,
   FlattenInterpolation,
+  InterpolationFunction,
+  ThemeProps,
 } from 'styled-components';
+import styled from 'styled-components/native';
 
 import { FontsEnum } from '../../constants';
 import { TextWrapperProps, TVariant } from './text.types';

@@ -1,4 +1,5 @@
 import { createContext, FC, ReactNode, useMemo } from 'react';
+
 import { TUser } from '../types';
 
 export const UserContext = createContext<{ user: TUser | null }>({

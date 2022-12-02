@@ -1,13 +1,12 @@
 /* eslint-disable react/no-unstable-nested-components */
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import { FC } from 'react';
 import { Platform, View } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
-
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './home';
 import { Box, Image, Text } from '../../components';
 import { AssetsEnum } from '../../constants';
+import HomeScreen from './home';
 
 const makeDumbScreen = (title: string) => () =>
   (

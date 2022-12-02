@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
 import {
-  ScreenContainer,
-  Text,
   Box,
   Button,
-  Spacer,
   Image,
+  ScreenContainer,
+  Spacer,
+  Text,
 } from '../../../components';
 import { AssetsEnum } from '../../../constants';
 

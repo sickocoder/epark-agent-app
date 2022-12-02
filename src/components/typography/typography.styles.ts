@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import { makePropToStyleMapper } from '../../utils/styles/styles';
 import { basicStyles } from './typography-config/mapper';
 

@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { TextProps } from './text.types';
 
 import { TextWrapper } from './text.styles';
+import { TextProps } from './text.types';
 
 const Text: FC<TextProps> = ({
   variant = 'normal',
