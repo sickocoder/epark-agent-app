@@ -1,10 +1,8 @@
-import { FC } from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { FC } from 'react';
 
 import { ScreensEnum } from '../../constants';
-
 import GetStarted from './get-started';
 import LoginScreen from './login';
 

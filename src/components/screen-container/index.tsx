@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ViewWrapper, SafeAreaViewWrapper } from './screen-container.styles';
+import { SafeAreaViewWrapper, ViewWrapper } from './screen-container.styles';
 import { ScreenContainerProps } from './screen-container.types';
 
 const ScreenContainer: FC<ScreenContainerProps> = ({

@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+
 import { makePropToStyleMapper } from '../../utils/styles/styles';
-import { availableStyles, simpleStyles } from './box-styles/mappers';
 import { BoxProps } from './box.types';
+import { availableStyles, simpleStyles } from './box-styles/mappers';
 
 const mapPropToStyle = makePropToStyleMapper(simpleStyles, availableStyles);
 

@@ -1,7 +1,7 @@
 import { FC } from 'react';
+
 import Box from '../box';
 import Text from '../text';
-
 import { ButtonWrapper } from './button.styles';
 import { ButtonProps } from './button.types';
 

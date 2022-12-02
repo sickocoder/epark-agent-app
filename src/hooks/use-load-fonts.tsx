@@ -1,6 +1,4 @@
 /* eslint-disable camelcase */
-import { useFonts } from 'expo-font';
-
 import {
   Inter_100Thin,
   Inter_200ExtraLight,
@@ -32,6 +30,7 @@ import {
   Poppins_900Black,
   Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
 
 const useLoadFonts = () => {
   const [fontsLoaded] = useFonts({

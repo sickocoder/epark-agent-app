@@ -1,4 +1,5 @@
 import styled, { DefaultTheme } from 'styled-components/native';
+
 import { FontsEnum } from '../../constants';
 import { StyledTextInputProps } from './text-input.types';
 

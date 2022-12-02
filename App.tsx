@@ -1,35 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
+import { LogBox } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 
-import React, { useEffect, useState } from 'react';
-import * as SplashScreen from 'expo-splash-screen';
+import { Box } from './src/components';
 import { useLoadFonts } from './src/hooks';
 import AppRouting from './src/screens';
+import SVGatorComponent from './src/screens/splash/logo';
 import { defaulTheme } from './src/theme';
 
-import { Box } from './src/components';
-import SVGatorComponent from './src/screens/splash/logo';
-
-SplashScreen.hideAsync();
+LogBox.ignoreLogs(['AsyncStorage has been extracted from']); // Ignore log notification by message
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const { isFontLoaded } = useLoadFonts();
 
   useEffect(() => {
-    async function prepare() {
-      if (isFontLoaded) {
-        try {
-          setTimeout(async () => {
-            setAppIsReady(true);
-          }, 1600);
-        } catch (e) {
-          console.warn(e);
-        }
-      }
+    if (isFontLoaded) {
+      setTimeout(() => {
+        setAppIsReady(true);
+      }, 1600);
     }
-
-    prepare();
   }, [isFontLoaded]);
 
   if (!appIsReady) {

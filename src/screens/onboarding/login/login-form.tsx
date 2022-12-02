@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
-import { Box, TextInput, Button } from '../../../components';
+import { Box, Button, TextInput } from '../../../components';
 import { AnyObject } from '../../../types';
 
 const LoginForm: FC<{
