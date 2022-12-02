@@ -1,6 +1,9 @@
 import { FirebaseAuthService } from '../services';
 import { firebaseService } from '../services/firebase-config';
+import FirebaseUserService from '../services/user';
 
-// eslint-disable-next-line import/prefer-default-export
 export const makeFirebaseAuthService = () =>
   new FirebaseAuthService(firebaseService);
+
+export const makeFirebaseUserService = () =>
+  new FirebaseUserService(firebaseService);

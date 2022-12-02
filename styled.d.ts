@@ -1,4 +1,5 @@
 import 'styled-components/native';
+import { FontsEnum } from './src/constants';
 
 interface IPalette {
   main: string;
@@ -18,10 +19,13 @@ declare module 'styled-components/native' {
         red: string;
         fadedRed: string;
         gray2: string;
+        gray3: string;
         lightGray: string;
+        yellowLight: string;
       };
       primary: string;
       secondary: string;
     };
+    fonts: typeof FontsEnum;
   }
 }
