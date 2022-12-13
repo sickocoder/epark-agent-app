@@ -6,4 +6,6 @@ export const basicStyles = {
   fontSize: 'font-size',
   fontWeight: 'font-weight',
   color: 'color',
+  lineHeight: 'line-height',
+  textAlign: 'text-align',
 } as unknown as TypographyBasicStyleProps;

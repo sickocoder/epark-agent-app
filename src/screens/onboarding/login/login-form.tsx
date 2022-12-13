@@ -63,6 +63,7 @@ const LoginForm: FC<{
         variant="primary"
         onPress={handleSubmit(onSubmit)}
         disabled={!!errors.username || !!errors.password || isLoading}
+        loading={isLoading}
       >
         Entrar
       </Button>

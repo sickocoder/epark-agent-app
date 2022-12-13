@@ -32,5 +32,11 @@ export const simpleStyles = {
 
   background: 'background',
   border: 'border',
+  borderTopWidth: 'border-top-width',
+  borderRightWidth: 'border-right-width',
+  borderBottomWidth: 'border-bottom-width',
+  borderLeftWidth: 'border-left-width',
   borderRadius: 'border-radius',
+
+  opacity: 'opacity',
 } as unknown as BoxSimpleStyleProps;

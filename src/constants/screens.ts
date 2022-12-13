@@ -9,5 +9,11 @@ export default Object.freeze({
   },
   main: {
     home: 'home',
+    mainTabs: 'MainTabs',
+    addAutomobile: 'AddAutomobileScreen',
+    slotDetails: 'SlotDetailsScreen',
+    closeOut: 'CloseOutScreen',
+    paymentDone: 'PaymentDoneScreen',
+    askNumber: 'AskNumberScreen',
   },
 });

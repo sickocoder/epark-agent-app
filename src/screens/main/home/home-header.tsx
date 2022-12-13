@@ -86,10 +86,10 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
             </Typography>
           </Box>
         </Box>
-        <Box marginLeft="14px" flex={1} flexDirection="column">
+        <Box marginLeft="10px" flex={1} flexDirection="column">
           <Typography
             fontFamily={fonts.poppings.Poppins_500Medium}
-            fontSize="18px"
+            fontSize="16px"
             color={palette.common.white}
           >
             Estacionamentos no dia
@@ -100,15 +100,15 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
               height={16}
               asset={AssetsEnum.icons.littleCarOrange}
             />
-            <Box width="8px" />
+            <Box width="4px" />
             <Typography
-              fontSize="13px"
+              fontSize="11px"
               fontFamily={fonts.inter.Inter_400Regular}
               color={palette.common.lightGray}
             >
               03 em parque
             </Typography>
-            <Box paddingHorizontal="6px">
+            <Box paddingHorizontal="4px">
               <Typography fontSize="30px" color={palette.common.white}>
                 •
               </Typography>
@@ -118,9 +118,9 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
               height={16}
               asset={AssetsEnum.icons.littleCarGreen}
             />
-            <Box width="8px" />
+            <Box width="4px" />
             <Typography
-              fontSize="13px"
+              fontSize="11px"
               fontFamily={fonts.inter.Inter_400Regular}
               color={palette.common.lightGray}
             >

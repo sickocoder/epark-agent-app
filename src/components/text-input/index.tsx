@@ -7,7 +7,7 @@ import {
 
 import { NativeTextInput } from './text-input.styles';
 
-const TextInput: FC<TextInputProps & { error: unknown }> = ({
+const TextInput: FC<TextInputProps & { error?: unknown }> = ({
   error,
   onFocus,
   onBlur,

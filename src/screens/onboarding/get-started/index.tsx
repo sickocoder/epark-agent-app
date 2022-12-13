@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { FC } from 'react';
 
 import {
@@ -8,55 +9,66 @@ import {
   Spacer,
   Text,
 } from '../../../components';
-import { AssetsEnum } from '../../../constants';
+import { AssetsEnum, ScreensEnum } from '../../../constants';
 
-const GetStarted: FC = () => (
-  <ScreenContainer withSafeArea>
-    <Box
-      paddingVertical="16px"
-      marginTop="32px"
-      paddingHorizontal="32px"
-      flex={1}
-      center
-    >
-      <Spacer />
+const GetStarted: FC = () => {
+  const navigation = useNavigation();
 
-      <Image asset={AssetsEnum.images.getStarted.mainIllustration} />
+  return (
+    <ScreenContainer withSafeArea>
+      <Box
+        paddingVertical="16px"
+        marginTop="32px"
+        paddingHorizontal="32px"
+        flex={1}
+        center
+      >
+        <Spacer />
 
-      <Box marginTop="24px">
-        <Text variant="heading" align="center">
-          O estacionamento na palma da sua mão
-        </Text>
-      </Box>
+        <Image asset={AssetsEnum.images.getStarted.mainIllustration} />
 
-      <Box marginTop="24px">
-        <Text align="center">
-          A Cas-park é um aplicativo de gestão para estacionamento simples e
-          intuitivo
-        </Text>
-      </Box>
+        <Box marginTop="24px">
+          <Text variant="heading" align="center">
+            O estacionamento na palma da sua mão
+          </Text>
+        </Box>
 
-      <Spacer />
-      <Spacer />
+        <Box marginTop="24px">
+          <Text align="center">
+            A Cas-park é um aplicativo de gestão para estacionamento simples e
+            intuitivo
+          </Text>
+        </Box>
 
-      <Box width="100%">
-        <Button variant="primary">
-          <Box flexDirection="row" center>
-            <Box marginRight="6px">
-              <Text color="#fff">Começar agora</Text>
+        <Spacer />
+        <Spacer />
+
+        <Box width="100%">
+          <Button
+            variant="primary"
+            onPress={() => {
+              navigation.navigate(
+                ScreensEnum.onboading.login as unknown as never
+              );
+            }}
+          >
+            <Box flexDirection="row" center>
+              <Box marginRight="6px">
+                <Text color="#fff">Começar agora</Text>
+              </Box>
+              <Image
+                width={24}
+                height={24}
+                asset={AssetsEnum.icons.circleChevronRight}
+              />
             </Box>
-            <Image
-              width={24}
-              height={24}
-              asset={AssetsEnum.icons.circleChevronRight}
-            />
-          </Box>
-        </Button>
-      </Box>
+          </Button>
+        </Box>
 
-      <Spacer />
-    </Box>
-  </ScreenContainer>
-);
+        <Spacer />
+      </Box>
+    </ScreenContainer>
+  );
+};
 
 export default GetStarted;

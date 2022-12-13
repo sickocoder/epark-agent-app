@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 const OnboardingRouting: FC = () => (
   <NavigationContainer>
     <Stack.Navigator
-      initialRouteName={ScreensEnum.onboading.login}
+      initialRouteName={ScreensEnum.onboading.getStarted}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen

@@ -1,4 +1,7 @@
 import carIllustration from '../assets/car-illustration.png';
+import frontCarIllustration from '../assets/front-car-illustration.png';
+import frontMotoIllustration from '../assets/front-moto-illustration.png';
+import frontVanIllustration from '../assets/front-van-illustration.png';
 import mainIllustration from '../assets/get-started-illustration.png';
 import iconCircleChevronRight from '../assets/icons/circle-checvron-right.png';
 import iconClockBlack from '../assets/icons/icon-clock-black.png';
@@ -14,6 +17,9 @@ import iconLittleCarOrange from '../assets/icons/little-car-orange.png';
 import iconUserLocation from '../assets/icons/user-location.png';
 import Logo from '../assets/logo.png';
 import motoIllustration from '../assets/moto-illustration.png';
+import parkedBikeIllustration from '../assets/parked-bike-illustration.png';
+import parkedCarIllustration from '../assets/parked-car-illustration.png';
+import vanIllustration from '../assets/van-illustration.png';
 
 export default Object.freeze({
   images: {
@@ -23,6 +29,12 @@ export default Object.freeze({
     logo: Logo,
     carIllustration,
     motoIllustration,
+    parkedCarIllustration,
+    parkedBikeIllustration,
+    vanIllustration,
+    frontCarIllustration,
+    frontMotoIllustration,
+    frontVanIllustration,
   },
   icons: {
     circleChevronRight: iconCircleChevronRight,

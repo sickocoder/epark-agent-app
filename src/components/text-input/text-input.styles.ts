@@ -25,7 +25,7 @@ export const NativeTextInput = styled.TextInput<StyledTextInputProps>`
   font-size: 15px;
   font-family: ${FontsEnum.inter.Inter_400Regular};
 
-  padding-vertical: 14px;
+  padding-vertical: 10px;
   padding-horizontal: 16px;
 
   background-color: ${({ theme }) => theme.palette.common.lightGray};

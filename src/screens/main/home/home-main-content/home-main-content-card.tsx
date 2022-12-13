@@ -1,34 +1,56 @@
+import { DocumentData, DocumentReference, getDoc } from 'firebase/firestore';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 
 import { Box, Image, Typography } from '../../../../components';
 import { withAppTheme } from '../../../../components/HOC';
+import { MOBILE_TYPE_TO_IMAGE } from '../../../../components/park-item';
 import { AssetsEnum } from '../../../../constants';
-import { ThemedComponent } from '../../../../types';
+import { ThemedComponent, TMobile, TParkItem } from '../../../../types';
 
-// TODO: imageAsset is temporary
-const HomeMainContentCard: ThemedComponent<{ imageAsset: object }> = ({
-  theme,
-  imageAsset,
-}) => {
+const HomeMainContentCard: ThemedComponent<{
+  slotInfo: TParkItem;
+}> = ({ theme, slotInfo }) => {
+  const [mobile, setMobile] = useState<TMobile>(null);
   const { fonts, palette } = theme;
 
   const makePill = (asset: object, text: string) => (
     <Box
-      alignItems="center"
+      flex={1}
+      center
       flexDirection="row"
       background={palette.common.gray3}
       paddingVertical="8px"
-      paddingHorizontal="16px"
+      paddingHorizontal="8px"
       borderRadius="8px"
     >
-      <Image asset={asset} />
+      <Image width={30} asset={asset} />
       <Typography fontSize="14px" fontFamily={fonts.inter.Inter_500Medium}>
         {' '}
         {text}
       </Typography>
     </Box>
   );
+
+  useEffect(() => {
+    (async () => {
+      if (!slotInfo.mobil) return;
+
+      const snapshot = await getDoc(
+        slotInfo.mobil as unknown as DocumentReference<DocumentData>
+      );
+      if (!snapshot.exists) return;
+
+      const mobileData = snapshot.data() as unknown as TMobile;
+      setMobile(mobileData);
+    })();
+  }, [slotInfo.mobil]);
+
+  if (!mobile) {
+    return null;
+  }
 
   return (
     <Box marginTop="20px">
@@ -56,14 +78,14 @@ const HomeMainContentCard: ThemedComponent<{ imageAsset: object }> = ({
                 paddingVertical="4px"
                 paddingHorizontal="16px"
                 border="2px solid #515B55"
-                borderRadius="100%"
+                borderRadius="200px"
               >
                 <Typography
-                  fontSize="14px"
+                  fontSize="12px"
                   fontFamily={fonts.inter.Inter_600SemiBold}
                   color={palette.common.gray2}
                 >
-                  ID: 12S01
+                  ID: {slotInfo.slotId}
                 </Typography>
               </Box>
             </Box>
@@ -76,11 +98,15 @@ const HomeMainContentCard: ThemedComponent<{ imageAsset: object }> = ({
               paddingVertical="8px"
               borderRadius="16px"
             >
-              <Image asset={imageAsset} />
+              <Image height={90} asset={MOBILE_TYPE_TO_IMAGE[mobile.type]} />
             </Box>
             <Box flexDirection="row" justifyContent="space-between">
-              {makePill(AssetsEnum.icons.littleCarBlack, 'LD-51-12-ED')}
-              {makePill(AssetsEnum.icons.clockBlack, 'Entrada: 09h')}
+              {makePill(AssetsEnum.icons.littleCarBlack, mobile.licensePlate)}
+              <Box width="4px" />
+              {makePill(
+                AssetsEnum.icons.clockBlack,
+                moment(mobile.enterTime.toDate()).format('DD/MM, HH:mm')
+              )}
             </Box>
           </Box>
         </View>

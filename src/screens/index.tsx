@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { UserProvider } from '../context';
+import { NotificationProvider, UserProvider } from '../context';
 import { useAuthentication } from '../hooks';
 import MainRouting from './main';
 import OnboardingRouting from './onboarding';
@@ -12,12 +12,16 @@ const AppRouting: FC = () => {
     return null;
   }
 
-  return isAuthenticated ? (
-    <UserProvider user={user}>
-      <MainRouting />
-    </UserProvider>
-  ) : (
-    <OnboardingRouting />
+  return (
+    <NotificationProvider>
+      {isAuthenticated ? (
+        <UserProvider user={user}>
+          <MainRouting />
+        </UserProvider>
+      ) : (
+        <OnboardingRouting />
+      )}
+    </NotificationProvider>
   );
 };
 
