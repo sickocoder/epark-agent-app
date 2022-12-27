@@ -5,7 +5,7 @@ import { makeFirestoreService } from '../factories';
 import { TParkItem } from '../types';
 import useNotification from './use-notification';
 
-const useGetSlots = () => {
+const useGetSlots = (ref: string) => {
   const { notificationCenter } = useNotification();
 
   const [parkingSlots, setParkingSlots] = useState<ReadonlyArray<TParkItem>>(
@@ -16,11 +16,11 @@ const useGetSlots = () => {
     let unsubscribe: Unsubscribe;
 
     (async () => {
+      if (ref === '') return;
+
       try {
         const service = makeFirestoreService();
-        const collectionData = service.getCollection(
-          'locations/luanda/viana/alimenta-angola/slots'
-        );
+        const collectionData = service.getCollection(ref);
 
         const q = query(collectionData);
 
@@ -44,11 +44,7 @@ const useGetSlots = () => {
               listOfSlots.push(slot);
             });
 
-            setParkingSlots(
-              listOfSlots
-                .filter((slot) => !slot.isAvailabel)
-                .sort((a, b) => a.name > b.name)
-            );
+            setParkingSlots(listOfSlots.sort((a, b) => a.name > b.name));
           },
           (_error) => {
             notificationCenter.showNotification({
@@ -58,10 +54,11 @@ const useGetSlots = () => {
           }
         );
       } catch (error) {
-        notificationCenter.showNotification({
-          message: 'Ocorreu um erro ao carregar os dados!',
-          variant: 'danger',
-        });
+        console.log(error);
+        // notificationCenter.showNotification({
+        //   message: 'Ocorreu um erro ao carregar os dados!',
+        //   variant: 'danger',
+        // });
       }
     })();
 
@@ -70,7 +67,7 @@ const useGetSlots = () => {
         unsubscribe();
       }
     };
-  }, [notificationCenter]);
+  }, [notificationCenter, parkingSlots, ref]);
 
   return { slots: parkingSlots };
 };

@@ -1,15 +1,23 @@
+import { useNavigation } from '@react-navigation/native';
 import CachedImage from 'expo-cached-image';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 
-import { Box, Image, Typography } from '../../../components';
+import { Box, Typography } from '../../../components';
 import { withAppTheme } from '../../../components/HOC';
-import { AssetsEnum } from '../../../constants';
+import { AssetsEnum, ScreensEnum } from '../../../constants';
 import { UserContext } from '../../../context';
 import { ThemedComponent } from '../../../types';
 
 const HomeHeader: ThemedComponent = ({ theme }) => {
+  const navigation = useNavigation();
+
   const { user } = useContext(UserContext);
   const { palette, fonts } = theme;
+
+  const goToProfile = useCallback(() => {
+    navigation.navigate(ScreensEnum.main.profile as unknown as never);
+  }, [navigation]);
 
   return (
     <Box width="100%" flexDirection="column">
@@ -30,28 +38,18 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
           </Typography>
         </Typography>
 
-        <CachedImage
-          source={{
-            uri: user.photoURL,
-          }}
-          cacheKey={`${user.photoURL}-thumb`}
-          placeholderContent={
-            <Box
-              width="40px"
-              height="40px"
-              borderRadius="24px"
-              background={palette.common.gray3}
-              border={`3px solid ${palette.common.gray2}`}
-            />
-          }
-          resizeMode="contain"
-          style={{
-            with: 40,
-            height: 40,
-            borderRadius: 24,
-            border: `3px solid ${palette.primary}`,
-          }}
-        />
+        <TouchableOpacity onPress={goToProfile}>
+          <Image
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 30,
+              borderColor: palette.primary,
+              borderWidth: 3,
+            }}
+            source={{ uri: user.photoURL }}
+          />
+        </TouchableOpacity>
       </Box>
 
       <Box

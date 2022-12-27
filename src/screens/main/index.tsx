@@ -5,49 +5,48 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FC } from 'react';
 import { Platform, View } from 'react-native';
 
-import { Box, Image, Text } from '../../components';
-import { AssetsEnum, ScreensEnum } from '../../constants';
+import { Box } from '../../components';
+import {
+  HistoryTabSelectedSvgComponent,
+  HistoryTabSvgComponent,
+  HomeTabSelectedSvgComponent,
+  HomeTabSvgComponent,
+  ParkTabSelectedSvgComponent,
+  ParkTabSvgComponent,
+} from '../../components/SVG';
+import { ScreensEnum } from '../../constants';
+import HistoryPage from './history';
 import HomeScreen from './home';
 import ParkScreen from './park';
 import AddAutomobileScreen from './park/add-automobil';
+import AddAutomobileSuccessScreen from './park/add-automobil/add-automobile-sucess';
 import CloseOutScreen from './park/close-out';
 import AskNumberScreen from './park/close-out/ask-number';
 import PaymentDoneScreen from './park/close-out/payment-done';
 import SlotDetailsScreen from './park/slot-details';
-
-const makeDumbScreen = (title: string) => {
-  const Component: FC = () => (
-    <Box flex={1} center>
-      <Text>{title}</Text>
-    </Box>
-  );
-
-  return Component;
-};
+import ProfilePage from './profile';
 
 const tabs = [
   {
     route: 'home',
     label: 'Home',
     component: HomeScreen,
-    defaultIcon: AssetsEnum.icons.home,
-    selectedIcon: AssetsEnum.icons.homeSelected,
+    defaultIcon: HomeTabSvgComponent,
+    selectedIcon: HomeTabSelectedSvgComponent,
   },
   {
     route: 'park',
     label: 'Park',
     component: ParkScreen,
-    defaultIcon: AssetsEnum.icons.park,
-    selectedIcon: AssetsEnum.icons.parkSelected,
+    defaultIcon: ParkTabSvgComponent,
+    selectedIcon: ParkTabSelectedSvgComponent,
   },
   {
     route: 'history',
     label: 'History',
-    component: makeDumbScreen(
-      'History Screen\nThis page is under development.'
-    ),
-    defaultIcon: AssetsEnum.icons.history,
-    selectedIcon: AssetsEnum.icons.historySelected,
+    component: HistoryPage,
+    defaultIcon: HistoryTabSvgComponent,
+    selectedIcon: HistoryTabSelectedSvgComponent,
   },
 ];
 
@@ -82,7 +81,7 @@ function MyTabs() {
           options={{
             tabBarLabel: tab.label,
             tabBarIcon: ({ focused }) => {
-              const asset = focused ? tab.selectedIcon : tab.defaultIcon;
+              const Icon = focused ? tab.selectedIcon : tab.defaultIcon;
 
               if (index === 1) {
                 return (
@@ -107,13 +106,13 @@ function MyTabs() {
                       background="white"
                       borderRadius="200px"
                     >
-                      <Image width={40} height={40} asset={asset} />
+                      <Icon />
                     </Box>
                   </View>
                 );
               }
 
-              return <Image width={32} height={32} asset={asset} />;
+              return <Icon />;
             },
           }}
         />
@@ -129,9 +128,14 @@ const MainRoutingSystem: FC = () => (
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name={ScreensEnum.main.mainTabs} component={MyTabs} />
+      <Stack.Screen name={ScreensEnum.main.profile} component={ProfilePage} />
       <Stack.Screen
         name={ScreensEnum.main.addAutomobile}
         component={AddAutomobileScreen}
+      />
+      <Stack.Screen
+        name={ScreensEnum.main.addAutomobileSuccess}
+        component={AddAutomobileSuccessScreen}
       />
       <Stack.Screen
         name={ScreensEnum.main.slotDetails}

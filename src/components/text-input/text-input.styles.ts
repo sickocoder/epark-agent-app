@@ -18,8 +18,8 @@ const getInputBorderColor = (
 export const NativeTextInput = styled.TextInput<StyledTextInputProps>`
   border-width: 1px;
   border-style: solid;
-  border-color: ${({ theme, hasFocus, error }) =>
-    getInputBorderColor(theme, hasFocus, error)};
+  border-color: ${({ theme, hasFocus, error, noBorder }) =>
+    noBorder ? 'transparent' : getInputBorderColor(theme, hasFocus, error)};
   border-radius: ${({ theme }) => theme.borderRadius};
 
   font-size: 15px;

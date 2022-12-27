@@ -12,6 +12,7 @@ import {
   ClockRedSvgComponent,
   NavigateBackSvgComponent,
 } from '../../../../components/SVG';
+import { ScreensEnum } from '../../../../constants';
 import { makeFirestoreService } from '../../../../factories';
 import { useNotification } from '../../../../hooks';
 import { AnyObject, ThemedComponent, TParkItem } from '../../../../types';
@@ -48,12 +49,13 @@ const AddAutomobileScreen: ThemedComponent = ({
       try {
         setIsLoading(true);
         const service = makeFirestoreService();
+        const enterTime = Timestamp.now();
 
         const mobileDocument = await addDoc(
           service.getCollection('automobile'),
           {
             ...formData,
-            enterTime: Timestamp.now(),
+            enterTime,
             type: selectedAutomobile.type,
           }
         );
@@ -65,7 +67,21 @@ const AddAutomobileScreen: ThemedComponent = ({
           mobil: mobileDocument,
         });
 
-        handleGoBack();
+        navigation.navigate(
+          ScreensEnum.main.addAutomobileSuccess as unknown as never,
+          {
+            slot: {
+              ...slot,
+              mobil: {
+                ...formData,
+                enterTime,
+                type: selectedAutomobile.type,
+              },
+            },
+          } as unknown as never
+        );
+
+        // handleGoBack();
       } catch (error) {
         notificationCenter.showNotification({
           message: 'Ocorreu um erro ao cadastrar o veiculo!',
@@ -75,7 +91,7 @@ const AddAutomobileScreen: ThemedComponent = ({
         setIsLoading(false);
       }
     },
-    [handleGoBack, notificationCenter, route.params, selectedAutomobile]
+    [navigation, notificationCenter, route.params, selectedAutomobile]
   );
 
   return (

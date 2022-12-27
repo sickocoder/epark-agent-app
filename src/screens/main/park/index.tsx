@@ -1,17 +1,21 @@
 import { useNavigation } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
 
 import { EmptyParkItem, ParkItem } from '../../../components';
 import { withAppTheme } from '../../../components/HOC';
 import { ScreensEnum } from '../../../constants';
+import { UserContext } from '../../../context';
 import { useGetSlots } from '../../../hooks';
 import { ThemedComponent, TParkItem } from '../../../types';
 import ParkHeader from './park-header';
 
 const ParkScreen: ThemedComponent = ({ theme }) => {
   const navigation = useNavigation();
-  const { slots: parkingSlots } = useGetSlots();
+  const { userInfo } = useContext(UserContext);
+  const { slots: parkingSlots } = useGetSlots(
+    userInfo ? userInfo.locationReference : ''
+  );
 
   const handleGoToAddAutomobile = useCallback(
     (slot: TParkItem) =>

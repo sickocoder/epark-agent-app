@@ -1,18 +1,39 @@
-import { FC } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { FC, useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import { Box, Typography } from '../../../../components';
+import { ScreensEnum } from '../../../../constants';
+import { UserContext } from '../../../../context';
 import { useGetSlots } from '../../../../hooks';
 import HomeMainContentCard from './home-main-content-card';
 
 const HomeMainContent: FC = () => {
-  const { slots } = useGetSlots();
+  const navigation = useNavigation();
+  const { userInfo } = useContext(UserContext);
+
+  const { slots } = useGetSlots(userInfo ? userInfo.locationReference : '');
 
   return (
     <Box>
       <Typography>Adicionado recentemente</Typography>
-      {slots.map((slot) => (
-        <HomeMainContentCard key={slot.slotId} slotInfo={slot} />
-      ))}
+      {slots
+        .filter((slot) => !slot.isAvailabel)
+        .map((slot) => (
+          <TouchableOpacity
+            key={slot.slotId}
+            onPress={() => {
+              navigation.navigate(
+                ScreensEnum.main.slotDetails as unknown as never,
+                {
+                  slot,
+                } as unknown as never
+              );
+            }}
+          >
+            <HomeMainContentCard slotInfo={slot} />
+          </TouchableOpacity>
+        ))}
     </Box>
   );
 };

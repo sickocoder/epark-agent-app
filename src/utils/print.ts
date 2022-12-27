@@ -9,7 +9,7 @@ export interface RecieptDetails {
   bill: string;
 }
 
-export const makeRecietTemplate = (recieptDetails: RecieptDetails) => `
+export const makeEnterRecieptTemplate = (recieptDetails: RecieptDetails) => `
 <html>
   <head>
     <meta
@@ -17,7 +17,7 @@ export const makeRecietTemplate = (recieptDetails: RecieptDetails) => `
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
     />
   </head>
-  <body style="text-align: center;">
+  <body>
     <div style="font-family: Helvetica Neue;">
       <div
         style="
@@ -49,13 +49,26 @@ export const makeRecietTemplate = (recieptDetails: RecieptDetails) => `
           ** OBRIGADO **
         </h3>
       </div>
+    </div>
+  </body>
+</html>
+`;
 
+export const makeRecietTemplate = (recieptDetails: RecieptDetails) => `
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+  </head>
+  <body>
+    <div style="font-family: Helvetica Neue;">
       <div
         style="
           text-align: center;
           border-bottom: 1px dashed #000;
           padding: 8px;
-          padding-top: 16px;
         "
       >
         <h3 style="font-weight: bold;">

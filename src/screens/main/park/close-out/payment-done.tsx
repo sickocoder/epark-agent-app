@@ -10,7 +10,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import uuid from 'react-native-uuid';
 
 import {
@@ -27,6 +27,7 @@ import {
   PrintWhiteSvgComponent,
   WalletYellowSvgComponent,
 } from '../../../../components/SVG';
+import { UserContext } from '../../../../context';
 import { makeFirestoreService } from '../../../../factories';
 import { useNotification, useRouteWithSlot } from '../../../../hooks';
 import { ThemedComponent, TMobile } from '../../../../types';
@@ -65,6 +66,7 @@ const InfoPanelItem: ThemedComponent<InfoPanelItemProps> = withAppTheme(
 
 const PaymentDoneScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
   const { notificationCenter } = useNotification();
+  const { user } = useContext(UserContext);
   const {
     params: { slot },
   } = useRouteWithSlot();
@@ -74,26 +76,28 @@ const PaymentDoneScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
   const [mobile, setMobile] = useState<TMobile>(null);
 
   const print = async () => {
+    const receiptInfo = {
+      id: uuid.v4().toString().toUpperCase(),
+      operatorId: user ? user.uid : '',
+      park: slot.park,
+      mobile: {
+        type: mobile.type,
+        licensePlate: mobile.licensePlate,
+        enterDate: moment(mobile.enterTime.toDate().toUTCString()).format(
+          'DD/MM/YYYY, HH:mm'
+        ),
+        outDate: moment().format('DD/MM/YYYY, HH:mm'),
+      },
+      bill: `${
+        getParkedTimeIntervalInMinutes(
+          mobile.enterTime.toDate().toUTCString(),
+          Timestamp.now().toDate().toUTCString()
+        ) * 10
+      } kz`,
+    };
+
     try {
       setIsPrinting(true);
-
-      const receiptInfo = {
-        id: uuid.v4().toString().toUpperCase(),
-        park: slot.park,
-        mobile: {
-          licensePlate: mobile.licensePlate,
-          enterDate: moment(mobile.enterTime.toDate().toUTCString()).format(
-            'YYYY-MM-DD, HH:mm:'
-          ),
-          outDate: moment().format('DD/MM/DD, HH:mm:'),
-        },
-        bill: `${
-          getParkedTimeIntervalInMinutes(
-            mobile.enterTime.toDate().toUTCString(),
-            Timestamp.now().toDate().toUTCString()
-          ) * 10
-        } kz`,
-      };
 
       try {
         const service = makeFirestoreService();
@@ -240,7 +244,13 @@ const PaymentDoneScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
               >
                 <Box flexDirection="row" center>
                   {hasPrinted ? (
-                    'Finalizar'
+                    <Typography
+                      color={palette.common.white}
+                      fontSize="16px"
+                      fontWeight="600"
+                    >
+                      Finalizar
+                    </Typography>
                   ) : (
                     <>
                       <Typography

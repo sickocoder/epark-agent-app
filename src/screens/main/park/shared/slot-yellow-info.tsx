@@ -8,9 +8,10 @@ const SlotYellowInfo: ThemedComponent<SlotInfoProps> = ({
   iconComponent: IconComponent,
   label,
   value,
+  background = '#FFFCF1',
 }) => (
   <Box
-    background="#FFFCF1"
+    background={background}
     paddingVertical="16px"
     paddingHorizontal="16px"
     borderRadius="8px"

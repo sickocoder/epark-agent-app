@@ -4,4 +4,5 @@
     "editor.guides": [],
 		"editor.tabSize": 2,
 		"editor.indentStyle": "Tabs",
+    "backend.maxHeapSizeMb": 896
 }

@@ -5,6 +5,7 @@ import {
   getDoc,
   Timestamp,
 } from 'firebase/firestore';
+import moment from 'moment';
 import { useCallback, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 
@@ -54,7 +55,7 @@ const SlotDetailsScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
 
   useEffect(() => {
     (async () => {
-      if (!slot.mobil) return;
+      if (!slot.mobil || mobile) return;
 
       const snapshot = await getDoc(
         slot.mobil as unknown as DocumentReference<DocumentData>
@@ -65,8 +66,12 @@ const SlotDetailsScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
       setMobile(mobileData);
     })();
 
-    setInterval(getParkedTime, 1000);
-  }, [getParkedTime, slot.mobil]);
+    const intervalId = setInterval(getParkedTime, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [getParkedTime, mobile, slot.mobil]);
 
   if (!mobile) return null;
 
@@ -103,11 +108,9 @@ const SlotDetailsScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
 
                 <SlotYellowInfo
                   label="Data e hora de entrada"
-                  value={`${mobile.enterTime
-                    .toDate()
-                    .toLocaleDateString()}, ${mobile.enterTime
-                    .toDate()
-                    .toLocaleTimeString()}`}
+                  value={`${moment(mobile.enterTime.toDate()).format(
+                    'DD/MM/YYYY'
+                  )}, ${moment(mobile.enterTime.toDate()).format('HH:mm')}`}
                   iconComponent={CallendarYellowSvgComponent as any}
                 />
                 <Box height="12px" />

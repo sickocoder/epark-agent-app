@@ -1,12 +1,13 @@
 import { FC } from 'react';
 
 import { NotificationProvider, UserProvider } from '../context';
-import { useAuthentication } from '../hooks';
+import { useAuthentication, useGetUserInfo } from '../hooks';
 import MainRouting from './main';
 import OnboardingRouting from './onboarding';
 
 const AppRouting: FC = () => {
   const { isAuthenticated, isLoading, user } = useAuthentication();
+  const { userInfo } = useGetUserInfo();
 
   if (isLoading) {
     return null;
@@ -15,7 +16,7 @@ const AppRouting: FC = () => {
   return (
     <NotificationProvider>
       {isAuthenticated ? (
-        <UserProvider user={user}>
+        <UserProvider user={user} userInfo={userInfo}>
           <MainRouting />
         </UserProvider>
       ) : (

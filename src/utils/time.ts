@@ -11,7 +11,7 @@ export const getParkedTimeIntervalInMinutes = (
 ) => moment(enterTime).hour() * 60 + moment(outTime).minute();
 
 export const getParkedTimeFormatted = (time: moment.Moment) => {
-  const parkedTimeString = time.format('DD, HH:mm');
+  const parkedTimeString = time.format('DD, HH:mm:ss');
   const splittedParkedTimeString = parkedTimeString.split(',');
 
   return `${

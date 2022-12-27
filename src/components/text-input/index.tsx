@@ -7,12 +7,9 @@ import {
 
 import { NativeTextInput } from './text-input.styles';
 
-const TextInput: FC<TextInputProps & { error?: unknown }> = ({
-  error,
-  onFocus,
-  onBlur,
-  ...props
-}) => {
+const TextInput: FC<
+  TextInputProps & { error?: unknown; noBorder?: boolean }
+> = ({ error, onFocus, onBlur, noBorder = false, ...props }) => {
   const [hasFocus, setHasFocus] = useState(false);
 
   const onTextFocus = useCallback(
@@ -40,6 +37,7 @@ const TextInput: FC<TextInputProps & { error?: unknown }> = ({
   return (
     <NativeTextInput
       {...props}
+      noBorder={noBorder}
       onFocus={onTextFocus}
       hasFocus={hasFocus}
       onBlur={onTextBlur}

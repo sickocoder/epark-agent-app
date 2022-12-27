@@ -52,11 +52,9 @@ const NotificationProviderWithTheme: ThemedComponent<
         setDescription(descriptionText);
       }
 
-      if (closeAfter) {
-        setTimeout(() => {
-          cleanUp();
-        }, 3000);
-      }
+      setTimeout(() => {
+        cleanUp();
+      }, closeAfter || 3000);
     },
     [cleanUp]
   );
@@ -78,7 +76,7 @@ const NotificationProviderWithTheme: ThemedComponent<
             background={variant === 'danger' ? palette.common.red : '#00a86b'}
             paddingVertical="16px"
             paddingHorizontal="32px"
-            // borderRadius={description ? '16px' : '50%'}
+            borderRadius={description ? '16px' : '400px'}
           >
             <Box center={!!description}>
               <Typography

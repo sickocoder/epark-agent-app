@@ -1,21 +1,19 @@
 {
   "name": "e-park",
-  "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "version": "1.0.1",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.2",
     "@expo-google-fonts/poppins": "^0.2.2",
-    "@react-navigation/bottom-tabs": "^6.4.3",
+    "@react-navigation/bottom-tabs": "^6.5.1",
     "@react-navigation/native": "^6.0.14",
     "@react-navigation/native-stack": "^6.9.2",
-    "@types/styled-components": "^5.1.26",
     "expo": "~47.0.8",
     "expo-cached-image": "^47.1.0",
     "expo-constants": "~14.0.2",
@@ -40,9 +38,10 @@
     "react-native-svg": "13.4.0",
     "react-native-uuid": "^2.0.1",
     "react-native-webview": "11.23.1",
-    "styled-components": "^5.3.6",
+    "styled-components": "^5.3.5",
     "typescript": "^4.9.3",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "expo-dev-client": "~2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

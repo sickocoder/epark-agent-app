@@ -20,3 +20,17 @@ export interface TMobile {
   ownerName: string;
   type: string;
 }
+
+export interface TParkingHistory {
+  id: string;
+  operatorId: string;
+  bill: string;
+  mobile: {
+    type: string;
+    enterDate: string;
+    licensePlate: string;
+    outDate: string;
+  };
+  park: string;
+  slotPath: string;
+}

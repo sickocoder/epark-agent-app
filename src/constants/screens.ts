@@ -9,8 +9,11 @@ export default Object.freeze({
   },
   main: {
     home: 'home',
+    profile: 'ProfileScreen',
+    history: 'HistoryScreen',
     mainTabs: 'MainTabs',
     addAutomobile: 'AddAutomobileScreen',
+    addAutomobileSuccess: 'AddAutomobileSuccessScreen',
     slotDetails: 'SlotDetailsScreen',
     closeOut: 'CloseOutScreen',
     paymentDone: 'PaymentDoneScreen',
