@@ -1,12 +1,13 @@
 import ExpoConstants from 'expo-constants';
 import moment from 'moment';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 
 import { Box, TextInput, Typography } from '../../../components';
 import { withAppTheme } from '../../../components/HOC';
 import { InfoSvgComponent, SearchSvgComponent } from '../../../components/SVG';
+import { UserContext } from '../../../context';
 import useGetHistory from '../../../hooks/use-get-history';
 import { ThemedComponent, TParkingHistory } from '../../../types';
 import HistoryItem from './history-item';
@@ -22,6 +23,7 @@ const MOBILE_TYPES = [
 
 const HistoryScreen: ThemedComponent = ({ theme }) => {
   const { history } = useGetHistory();
+  const { user } = useContext(UserContext);
 
   const [licensePlate, setLicensePalte] = useState('');
   const [selectedType, setSelectedType] = useState<{
@@ -32,24 +34,26 @@ const HistoryScreen: ThemedComponent = ({ theme }) => {
   const filteredHistory = useMemo(() => {
     let filteredData: ReadonlyArray<TParkingHistory> = [];
 
-    if (selectedType.value === 'all') {
-      filteredData = history;
-    } else {
-      filteredData = history.filter(
-        (record) => record.mobile.type === selectedType.value
-      );
-    }
+    if (user) {
+      filteredData = history.filter((record) => record.operatorId === user.uid);
 
-    if (licensePlate !== '') {
-      filteredData = filteredData.filter((record) =>
-        record.mobile.licensePlate
-          .toLowerCase()
-          .includes(licensePlate.toLowerCase())
-      );
+      if (selectedType.value !== 'all') {
+        filteredData = filteredData.filter(
+          (record) => record.mobile.type === selectedType.value
+        );
+      }
+
+      if (licensePlate !== '') {
+        filteredData = filteredData.filter((record) =>
+          record.mobile.licensePlate
+            .toLowerCase()
+            .includes(licensePlate.toLowerCase())
+        );
+      }
     }
 
     return filteredData;
-  }, [history, licensePlate, selectedType.value]);
+  }, [history, licensePlate, selectedType.value, user]);
 
   return (
     <ScrollView

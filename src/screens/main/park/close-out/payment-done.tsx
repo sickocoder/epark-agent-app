@@ -31,6 +31,7 @@ import { UserContext } from '../../../../context';
 import { makeFirestoreService } from '../../../../factories';
 import { useNotification, useRouteWithSlot } from '../../../../hooks';
 import { ThemedComponent, TMobile } from '../../../../types';
+import { getPricing } from '../../../../utils/money';
 import { makeRecietTemplate } from '../../../../utils/print';
 import {
   getParkedTimeFormatted,
@@ -76,6 +77,11 @@ const PaymentDoneScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
   const [mobile, setMobile] = useState<TMobile>(null);
 
   const print = async () => {
+    const enterDate = moment(mobile.enterTime.toDate().toUTCString());
+    const outDate = moment();
+
+    const bill = getPricing(enterDate, outDate);
+
     const receiptInfo = {
       id: uuid.v4().toString().toUpperCase(),
       operatorId: user ? user.uid : '',
@@ -83,17 +89,10 @@ const PaymentDoneScreen: ThemedComponent = ({ theme: { palette, fonts } }) => {
       mobile: {
         type: mobile.type,
         licensePlate: mobile.licensePlate,
-        enterDate: moment(mobile.enterTime.toDate().toUTCString()).format(
-          'DD/MM/YYYY, HH:mm'
-        ),
-        outDate: moment().format('DD/MM/YYYY, HH:mm'),
+        enterDate: enterDate.format('DD/MM/YYYY, HH:mm'),
+        outDate: outDate.format('DD/MM/YYYY, HH:mm'),
       },
-      bill: `${
-        getParkedTimeIntervalInMinutes(
-          mobile.enterTime.toDate().toUTCString(),
-          Timestamp.now().toDate().toUTCString()
-        ) * 10
-      } kz`,
+      bill: `${bill > 0 ? `${bill}kz` : 'Grátis'}`,
     };
 
     try {

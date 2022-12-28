@@ -1,10 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import CachedImage from 'expo-cached-image';
 import ExpoConstants from 'expo-constants';
 import { useContext } from 'react';
 import { Image, ScrollView, TouchableOpacity } from 'react-native';
 
-import { Box, ShadowView, Typography } from '../../../components';
+import {
+  Box,
+  Button,
+  ShadowView,
+  Spacer,
+  Typography,
+} from '../../../components';
 import { withAppTheme } from '../../../components/HOC';
 import {
   LocationYellowSvgComponent,
@@ -14,6 +19,7 @@ import {
   UserSettingsYellowSvgComponent,
 } from '../../../components/SVG';
 import { UserContext } from '../../../context';
+import { makeFirebaseAuthService } from '../../../factories';
 import { ThemedComponent } from '../../../types';
 import SlotYellowInfo from '../park/shared/slot-yellow-info';
 
@@ -95,7 +101,7 @@ const ProfilePage: ThemedComponent = ({ theme: { palette, fonts } }) => {
           <SlotYellowInfo
             background={palette.common.gray3}
             label="Nome completo"
-            value={user.displayName}
+            value={userInfo.displayName}
             iconComponent={PersonYellowSvgComponent as any}
           />
           <Box height="12px" />
@@ -119,6 +125,18 @@ const ProfilePage: ThemedComponent = ({ theme: { palette, fonts } }) => {
             value={userInfo.locationName}
             iconComponent={LocationYellowSvgComponent as any}
           />
+          <Spacer />
+          <Box height="56px" paddingHorizontal="5%">
+            <Button
+              variant="secondary"
+              onPress={() => {
+                const service = makeFirebaseAuthService();
+                service.auth.signOut();
+              }}
+            >
+              Terminar Sessão
+            </Button>
+          </Box>
         </ShadowView>
       </Box>
     </ScrollView>

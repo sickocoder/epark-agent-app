@@ -18,7 +18,7 @@ export const makeEnterRecieptTemplate = (recieptDetails: RecieptDetails) => `
     />
   </head>
   <body>
-    <div style="font-family: Helvetica Neue;">
+    <div style="font-family: Helvetica Neue; font-size: 20px;">
       <div
         style="
           text-align: center;
@@ -29,7 +29,7 @@ export const makeEnterRecieptTemplate = (recieptDetails: RecieptDetails) => `
         <h3 style="font-weight: bold;">
           ** Ticket De Entrada **
         </h3>
-        <h4>${recieptDetails.id}</h4>
+        <h4 style="font-size: 14px;">${recieptDetails.id}</h4>
       </div>
       <div style="padding: 16px 8px 16px 8px; border-bottom: 1px dashed #000;">
         <div><strong>Parque:</strong> ${recieptDetails.park}</div>
@@ -63,7 +63,7 @@ export const makeRecietTemplate = (recieptDetails: RecieptDetails) => `
     />
   </head>
   <body>
-    <div style="font-family: Helvetica Neue;">
+    <div style="font-family: Helvetica Neue; font-size: 20px;">
       <div
         style="
           text-align: center;
@@ -74,7 +74,7 @@ export const makeRecietTemplate = (recieptDetails: RecieptDetails) => `
         <h3 style="font-weight: bold;">
           ** Ticket De Saída **
         </h3>
-        <h4>A32343</h4>
+        <h4 style="font-size: 14px;">${recieptDetails.id}</h4>
       </div>
       <div style="padding: 16px 8px 16px 8px; border-bottom: 1px dashed #000;">
         <div><strong>Parque:</strong> ${recieptDetails.park}</div>

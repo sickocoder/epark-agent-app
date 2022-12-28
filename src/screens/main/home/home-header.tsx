@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native';
-import CachedImage from 'expo-cached-image';
 import { useCallback, useContext } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 
@@ -12,12 +11,14 @@ import { ThemedComponent } from '../../../types';
 const HomeHeader: ThemedComponent = ({ theme }) => {
   const navigation = useNavigation();
 
-  const { user } = useContext(UserContext);
+  const { userInfo } = useContext(UserContext);
   const { palette, fonts } = theme;
 
   const goToProfile = useCallback(() => {
     navigation.navigate(ScreensEnum.main.profile as unknown as never);
   }, [navigation]);
+
+  if (!userInfo) return null;
 
   return (
     <Box width="100%" flexDirection="column">
@@ -34,7 +35,7 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
             fontSize="20px"
             fontFamily={fonts.poppings.Poppins_800ExtraBold}
           >
-            , {user.displayName.split(' ')[0]}
+            , {userInfo.displayName.split(' ')[0]}
           </Typography>
         </Typography>
 
@@ -47,7 +48,7 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
               borderColor: palette.primary,
               borderWidth: 3,
             }}
-            source={{ uri: user.photoURL }}
+            source={{ uri: userInfo.avatar }}
           />
         </TouchableOpacity>
       </Box>
