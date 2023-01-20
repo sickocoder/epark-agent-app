@@ -5,7 +5,7 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "react", "prettier"],
+  "plugins": ["@typescript-eslint", "react", "prettier", "simple-import-sort"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,6 +16,9 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": "off",
     "react/jsx-props-no-spreading": "off",
@@ -30,7 +33,6 @@
       "error",
       {
         "singleQuote": true,
-        "trailingComma": "all",
         "endOfLine": "auto"
       }
     ],

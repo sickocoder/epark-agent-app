@@ -1,20 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'expo-dev-client';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
+import { LogBox } from 'react-native';
+import { ThemeProvider } from 'styled-components';
+
+import { Box } from './src/components';
+import { useLoadFonts } from './src/hooks';
+import AppRouting from './src/screens';
+import SVGatorComponent from './src/screens/splash/logo';
+import { defaulTheme } from './src/theme';
+
+LogBox.ignoreLogs([
+  'AsyncStorage has been extracted from',
+  'Non-serializable values were found in the navigation state',
+  'Require cycle:',
+]); // Ignore log notification by message
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+  const { isFontLoaded } = useLoadFonts();
+
+  useEffect(() => {
+    if (isFontLoaded) {
+      setTimeout(() => {
+        setAppIsReady(true);
+      }, 1600);
+    }
+  }, [isFontLoaded]);
+
+  if (!appIsReady) {
+    return (
+      <Box flex={1} center paddingHorizontal="48px">
+        <SVGatorComponent />
+      </Box>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>E-Park App</Text>
+    <ThemeProvider theme={defaulTheme}>
       <StatusBar style="auto" />
-    </View>
+      <AppRouting />
+    </ThemeProvider>
   );
 }
