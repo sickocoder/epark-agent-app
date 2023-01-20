@@ -1,15 +1,24 @@
-import CachedImage from 'expo-cached-image';
-import { useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useCallback, useContext } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 
-import { Box, Image, Typography } from '../../../components';
+import { Box, Typography } from '../../../components';
 import { withAppTheme } from '../../../components/HOC';
-import { AssetsEnum } from '../../../constants';
+import { AssetsEnum, ScreensEnum } from '../../../constants';
 import { UserContext } from '../../../context';
 import { ThemedComponent } from '../../../types';
 
 const HomeHeader: ThemedComponent = ({ theme }) => {
-  const { user } = useContext(UserContext);
+  const navigation = useNavigation();
+
+  const { userInfo } = useContext(UserContext);
   const { palette, fonts } = theme;
+
+  const goToProfile = useCallback(() => {
+    navigation.navigate(ScreensEnum.main.profile as unknown as never);
+  }, [navigation]);
+
+  if (!userInfo) return null;
 
   return (
     <Box width="100%" flexDirection="column">
@@ -26,32 +35,22 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
             fontSize="20px"
             fontFamily={fonts.poppings.Poppins_800ExtraBold}
           >
-            , {user.displayName.split(' ')[0]}
+            , {userInfo.displayName.split(' ')[0]}
           </Typography>
         </Typography>
 
-        <CachedImage
-          source={{
-            uri: user.photoURL,
-          }}
-          cacheKey={`${user.photoURL}-thumb`}
-          placeholderContent={
-            <Box
-              width="40px"
-              height="40px"
-              borderRadius="24px"
-              background={palette.common.gray3}
-              border={`3px solid ${palette.common.gray2}`}
-            />
-          }
-          resizeMode="contain"
-          style={{
-            with: 40,
-            height: 40,
-            borderRadius: 24,
-            border: `3px solid ${palette.primary}`,
-          }}
-        />
+        <TouchableOpacity onPress={goToProfile}>
+          <Image
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 30,
+              borderColor: palette.primary,
+              borderWidth: 3,
+            }}
+            source={{ uri: userInfo.avatar }}
+          />
+        </TouchableOpacity>
       </Box>
 
       <Box
@@ -86,10 +85,10 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
             </Typography>
           </Box>
         </Box>
-        <Box marginLeft="14px" flex={1} flexDirection="column">
+        <Box marginLeft="10px" flex={1} flexDirection="column">
           <Typography
             fontFamily={fonts.poppings.Poppins_500Medium}
-            fontSize="18px"
+            fontSize="16px"
             color={palette.common.white}
           >
             Estacionamentos no dia
@@ -100,15 +99,15 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
               height={16}
               asset={AssetsEnum.icons.littleCarOrange}
             />
-            <Box width="8px" />
+            <Box width="4px" />
             <Typography
-              fontSize="13px"
+              fontSize="11px"
               fontFamily={fonts.inter.Inter_400Regular}
               color={palette.common.lightGray}
             >
               03 em parque
             </Typography>
-            <Box paddingHorizontal="6px">
+            <Box paddingHorizontal="4px">
               <Typography fontSize="30px" color={palette.common.white}>
                 •
               </Typography>
@@ -118,9 +117,9 @@ const HomeHeader: ThemedComponent = ({ theme }) => {
               height={16}
               asset={AssetsEnum.icons.littleCarGreen}
             />
-            <Box width="8px" />
+            <Box width="4px" />
             <Typography
-              fontSize="13px"
+              fontSize="11px"
               fontFamily={fonts.inter.Inter_400Regular}
               color={palette.common.lightGray}
             >

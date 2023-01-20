@@ -9,10 +9,12 @@ import {
 import { Box, Image, ScreenContainer, Spacer, Text } from '../../../components';
 import { AssetsEnum } from '../../../constants';
 import { makeFirebaseAuthService } from '../../../factories';
+import { useNotification } from '../../../hooks';
 import { AnyObject } from '../../../types';
 import LoginForm from './login-form';
 
 const LoginScreen: FC = () => {
+  const { notificationCenter } = useNotification();
   const [isLoading, setIsLoading] = useState(false);
 
   const onFormSubmit = (values: AnyObject) => {
@@ -25,7 +27,12 @@ const LoginScreen: FC = () => {
           password: values.password,
         });
       } catch (error) {
-        console.log(error);
+        notificationCenter.showNotification({
+          message: 'Erro ao iniciar sessão!',
+          description: 'Verifique as suas credenciais por favor.',
+          variant: 'danger',
+          closeAfter: 5000,
+        });
       } finally {
         setIsLoading(false);
       }
@@ -40,7 +47,7 @@ const LoginScreen: FC = () => {
       >
         <ScreenContainer withSafeArea>
           <Box
-            paddingHorizontal="32px"
+            paddingHorizontal="5%"
             marginBottom="100px"
             flex={1}
             flexDirection="column"
@@ -48,8 +55,8 @@ const LoginScreen: FC = () => {
           >
             <Spacer />
 
-            <Image width={250} height={60} asset={AssetsEnum.images.logo} />
-            <Box flex={1} marginTop="48px">
+            <Image height={120} asset={AssetsEnum.images.logo} />
+            <Box flex={1} marginTop="32px">
               <Text variant="heading" align="center">
                 Login
               </Text>

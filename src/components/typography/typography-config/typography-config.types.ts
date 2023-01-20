@@ -3,4 +3,6 @@ export interface TypographyBasicStyleProps {
   fontSize?: string;
   fontWeight?: string;
   color?: string;
+  lineHeight?: string;
+  textAlign?: string;
 }

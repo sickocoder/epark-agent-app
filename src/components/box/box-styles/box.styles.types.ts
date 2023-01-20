@@ -25,7 +25,13 @@ export interface BoxSimpleStyleProps {
 
   background?: string;
   border?: string;
+  borderTopWidth?: string;
+  borderRightWidth?: string;
+  borderBottomWidth?: string;
+  borderLeftWidth?: string;
   borderRadius?: string;
+
+  opacity?: number;
 }
 
 export interface BoxStyleProps extends BoxSimpleStyleProps {

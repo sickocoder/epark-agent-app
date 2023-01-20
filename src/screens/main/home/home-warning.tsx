@@ -1,10 +1,14 @@
+import { useContext } from 'react';
+
 import { Box, Image, Typography } from '../../../components';
 import { withAppTheme } from '../../../components/HOC';
 import { AssetsEnum } from '../../../constants';
+import { UserContext } from '../../../context';
 import { ThemedComponent } from '../../../types';
 
 const HomeWarningAlert: ThemedComponent = ({ theme }) => {
   const { palette, fonts } = theme;
+  const { userInfo } = useContext(UserContext);
 
   return (
     <Box
@@ -18,7 +22,7 @@ const HomeWarningAlert: ThemedComponent = ({ theme }) => {
       <Image width={24} height={24} asset={AssetsEnum.icons.userLocation} />
       <Typography fontSize="14px" fontFamily={fonts.inter.Inter_500Medium}>
         {' '}
-        Rua B13, avenida vicente, 1º de Maio{' '}
+        {userInfo ? userInfo.locationName : '...a carregar...'}{' '}
       </Typography>
     </Box>
   );
