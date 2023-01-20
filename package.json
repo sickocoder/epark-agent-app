@@ -17,6 +17,7 @@
     "expo": "~47.0.8",
     "expo-cached-image": "^47.1.0",
     "expo-constants": "~14.0.2",
+    "expo-dev-client": "~2.0.1",
     "expo-font": "~11.0.1",
     "expo-linear-gradient": "~12.0.1",
     "expo-print": "~12.0.0",
@@ -38,17 +39,15 @@
     "react-native-svg": "13.4.0",
     "react-native-uuid": "^2.0.1",
     "react-native-webview": "11.23.1",
-    "styled-components": "^5.3.5",
+    "styled-components": "^5.3.6",
     "typescript": "^4.9.3",
-    "uuid": "^9.0.0",
-    "expo-dev-client": "~2.0.1"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@types/jest": "^29.2.3",
     "@types/react-native": "^0.70.7",
     "@types/react-test-renderer": "^18.0.0",
-    "@types/styled-components-react-native": "^5.2.0",
     "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
@@ -64,6 +63,9 @@
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
     "prettier": "^2.8.0"
+  },
+  "resolutions": {
+    "@types/react": "17.0.43"
   },
   "private": true,
   "husky": {
